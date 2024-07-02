@@ -6,7 +6,7 @@ public class TransactionValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionValidator.class);
     private static final String DEFAULT_VALUE = "01";
     private static final String NON_DEFAULT_VALUE = "02";
-    private static final List<String> lista = List.of("02", "03", "04", "05", "12");
+    private static final List<String> LIST_OF_BITS = List.of("02", "03", "04", "05", "12");
 
     public void validate(ISOModel m) {
         LOGGER.info("Início");
