@@ -26,8 +26,8 @@ public class TransactionValidator {
         }
     }
 
-    private boolean isNotValid(boolean validaPreenchido, boolean validaVazio, boolean validaAux, String str) {
-        return validaPreenchido || validaVazio && !validaAux && str.equals("01");
+    private boolean isNotValid(boolean isBit02NotSet, boolean isBit02Empty, boolean isBit02EmptyAndBit03Null, String bit02Value) {
+        return isBit02NotSet || isBit02Empty && !isBit02EmptyAndBit03Null && DEFAULT_VALUE.equals(bit02Value);
     }
 
     private boolean isTransactionValid(ISOModel model) {
