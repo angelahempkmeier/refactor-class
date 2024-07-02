@@ -3,7 +3,7 @@ import java.util.logging.Logger;
 
 
 public class TransactionValidator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CapturaTransacaoService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionValidator.class);
     private static final String BIT_02 = "02";
 
     private static final List<String> lista = List.of("02", "03", "04", "05", "12");
