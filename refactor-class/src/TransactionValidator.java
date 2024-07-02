@@ -11,10 +11,11 @@ public class TransactionValidator {
     public void validate(ISOModel model) {
         LOGGER.info("Starting transaction validation.");
 
-        boolean isNotPreenchido = model.getBit02() == null;
-        boolean validateAux = model.getBit02() != null && model.getBit02().getValue().isEmpty();
-        boolean auxValidacao = model.getBit02() != null && model.getBit02().getValue().isEmpty() && model.getBit03() == null;
-        String valor = isNotPreenchido ? "01" : "02";
+        boolean isBit02NotSet = model.getBit02() == null;
+        boolean isBit02Empty = !isBit02NotSet && model.getBit02().getValue().isEmpty();
+        boolean isBit02EmptyAndBit03Null  = isBit02Empty && model.getBit03() == null;
+
+        String bit02Value = isBit02NotSet ? DEFAULT_VALUE : NON_DEFAULT_VALUE;
 
         try{
             if(!isNotValid(isNotPreenchido, validateAux, auxValidacao, valor)) {
