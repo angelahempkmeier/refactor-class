@@ -1,7 +1,6 @@
 import java.util.List;
 import java.util.logging.Logger;
 
-
 public class TransactionValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionValidator.class);
     private static final String DEFAULT_VALUE = "01";
@@ -18,7 +17,7 @@ public class TransactionValidator {
         String bit02Value = isBit02NotSet ? DEFAULT_VALUE : NON_DEFAULT_VALUE;
 
         if (isNotValid(isBit02NotSet, isBit02Empty, isBit02EmptyAndBit03Null , bit02Value)) {
-            throw new IllegalStateException("Valores não preenchidos corretamente");
+            throw new IllegalStateException("Values not correctly filled.");
         }
 
         if (isTransactionValid(model)) {
@@ -38,11 +37,11 @@ public class TransactionValidator {
                 model.getBit12() != null;
     }
 
-    private void salvar(ISOModel model, boolean auxValidacao) {
-        if(auxValidacao) {
-            throw new IllegalArgumentException("Validacao falhou");
+    private void saveTransaction(ISOModel model, boolean isBit02EmptyAndBit03Null) {
+        if (isBit02EmptyAndBit03Null) {
+            throw new IllegalArgumentException("Validation failed: Bit02 is empty or Bit03 is null or both.");
         }
 
-        System.out.println("Salvando transacao " + model.getBit02().getValue());
+        LOGGER.info("Saving transaction with Bit02: {}", model.getBit02().getValue());
     }
 }
