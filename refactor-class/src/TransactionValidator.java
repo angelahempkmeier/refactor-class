@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-public class TransacaoValidator {
+public class TransactionValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(CapturaTransacaoService.class);
     private static final String BIT_02 = "02";
 
