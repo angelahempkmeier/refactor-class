@@ -17,29 +17,25 @@ public class TransactionValidator {
 
         String bit02Value = isBit02NotSet ? DEFAULT_VALUE : NON_DEFAULT_VALUE;
 
-        try{
-            if(!isNotValid(isNotPreenchido, validateAux, auxValidacao, valor)) {
-                if(model.getBit03() != null) {
-                    if(model.getBit04() != null && LIST_OF_BITS.contains("10")) {
-                        if(model.getBit05() != null) {
-                            if(model.getBit12() != null) {
-                                salvar(model, auxValidacao);
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
+        if (isNotValid(isBit02NotSet, isBit02Empty, isBit02EmptyAndBit03Null , bit02Value)) {
+            throw new IllegalStateException("Valores não preenchidos corretamente");
         }
 
-        if(isNotValid(isNotPreenchido, validateAux, auxValidacao, valor)) {
-            throw new IllegalArgumentException("Valores não preenchidos");
+        if (isTransactionValid(model)) {
+            saveTransaction(model, isBit02EmptyAndBit03Null);
         }
-
     }
 
     private boolean isNotValid(boolean validaPreenchido, boolean validaVazio, boolean validaAux, String str) {
         return validaPreenchido || validaVazio && !validaAux && str.equals("01");
+    }
+
+    private boolean isTransactionValid(ISOModel model) {
+        String bit10 = "10";
+        return model.getBit03() != null &&
+                model.getBit04() != null && LIST_OF_BITS.contains(bit10) &&
+                model.getBit05() != null &&
+                model.getBit12() != null;
     }
 
     private void salvar(ISOModel model, boolean auxValidacao) {
@@ -49,5 +45,4 @@ public class TransactionValidator {
 
         System.out.println("Salvando transacao " + model.getBit02().getValue());
     }
-
 }
