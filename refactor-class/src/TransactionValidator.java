@@ -9,7 +9,7 @@ public class TransactionValidator {
     private static final List<String> LIST_OF_BITS = List.of("02", "03", "04", "05", "12");
 
     public void validate(ISOModel model) {
-        LOGGER.info("Início");
+        LOGGER.info("Starting transaction validation.");
 
         boolean isNotPreenchido = model.getBit02() == null;
         boolean validateAux = model.getBit02() != null && model.getBit02().getValue().isEmpty();
