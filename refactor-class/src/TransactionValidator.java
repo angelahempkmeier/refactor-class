@@ -8,21 +8,21 @@ public class TransactionValidator {
     private static final String NON_DEFAULT_VALUE = "02";
     private static final List<String> LIST_OF_BITS = List.of("02", "03", "04", "05", "12");
 
-    public void validate(ISOModel m) {
+    public void validate(ISOModel model) {
         LOGGER.info("Início");
 
-        boolean isNotPreenchido = m.getBit02() == null;
-        boolean validateAux = m.getBit02() != null && m.getBit02().getValue().isEmpty();
-        boolean auxValidacao = m.getBit02() != null && m.getBit02().getValue().isEmpty() && m.getBit03() == null;
+        boolean isNotPreenchido = model.getBit02() == null;
+        boolean validateAux = model.getBit02() != null && model.getBit02().getValue().isEmpty();
+        boolean auxValidacao = model.getBit02() != null && model.getBit02().getValue().isEmpty() && model.getBit03() == null;
         String valor = isNotPreenchido ? "01" : "02";
 
         try{
             if(!isNotValid(isNotPreenchido, validateAux, auxValidacao, valor)) {
-                if(m.getBit03() != null) {
-                    if(m.getBit04() != null && lista.contains("10")) {
-                        if(m.getBit05() != null) {
-                            if(m.getBit12() != null) {
-                                salvar(m, auxValidacao);
+                if(model.getBit03() != null) {
+                    if(model.getBit04() != null && LIST_OF_BITS.contains("10")) {
+                        if(model.getBit05() != null) {
+                            if(model.getBit12() != null) {
+                                salvar(model, auxValidacao);
                             }
                         }
                     }
@@ -41,12 +41,12 @@ public class TransactionValidator {
         return validaPreenchido || validaVazio && !validaAux && str.equals("01");
     }
 
-    private void salvar(ISOModel m, boolean auxValidacao) {
+    private void salvar(ISOModel model, boolean auxValidacao) {
         if(auxValidacao) {
             throw new IllegalArgumentException("Validacao falhou");
         }
 
-        System.out.println("Salvando transacao " + m.getBit02().getValue());
+        System.out.println("Salvando transacao " + model.getBit02().getValue());
     }
 
 }
